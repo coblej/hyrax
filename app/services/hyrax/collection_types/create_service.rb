@@ -21,7 +21,9 @@ module Hyrax
         allow_multiple_membership: true,
         require_membership: false,
         assigns_workflow: false,
-        assigns_visibility: false
+        assigns_visibility: false,
+        participants: [{ agent_type: 'group', agent_id: 'admin', access: 'manage' },
+                       { agent_type: 'group', agent_id: 'registered', access: 'create' }]
       }.freeze
 
       # @param machine_id [String]
@@ -30,7 +32,7 @@ module Hyrax
       # @return [Hyrax::CollectionType]
       def self.create_collection_type(machine_id: DEFAULT_MACHINE_ID, title: DEFAULT_TITLE, options: {})
         opts = DEFAULT_OPTIONS.merge(options)
-        Hyrax::CollectionType.create(machine_id: machine_id, title: title) do |c|
+        ct = Hyrax::CollectionType.create(machine_id: machine_id, title: title) do |c|
           c.description = opts[:description]
           c.nestable = opts[:nestable]
           c.discoverable = opts[:discoverable]
@@ -39,6 +41,20 @@ module Hyrax
           c.require_membership = opts[:require_membership]
           c.assigns_workflow = opts[:assigns_workflow]
           c.assigns_visibility = opts[:assigns_visibility]
+        end
+        add_participants(ct.id, opts[:participants])
+        ct
+      end
+
+      # @param collection_type_id [Integer]
+      # @param participants [Array]
+      def self.add_participants(collection_type_id, participants)
+        return unless collection_type_id && participants.count > 0
+        participants.each do |p|
+          agent_type = p[:agent_type]
+          agent_id = p[:agent_id]
+          access = p[:access]
+          Hyrax::CollectionTypeParticipant.create(hyrax_collection_type_id: collection_type_id, agent_type: agent_type, agent_id: agent_id, access: access)
         end
       end
     end
