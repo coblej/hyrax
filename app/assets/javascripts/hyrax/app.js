@@ -4,7 +4,6 @@ Hyrax = {
     initialize: function () {
         this.popovers();
         this.permissions();
-        this.notifications();
         this.transfers();
         this.workEditor();
         this.fileManager();
@@ -39,7 +38,6 @@ Hyrax = {
       var CollectionControls = require('hyrax/collections/editor');
       var controls = new CollectionControls($('#collection-controls'));
     },
-
 
     // Pretty graphs on the dashboard page
     adminStatisticsGraphs: function() {
@@ -85,16 +83,6 @@ Hyrax = {
         new PermissionsControl($("#form_permissions"), 'tmpl-work-grant');
         // On the edit collection page
         new PermissionsControl($("#collection_permissions"), 'tmpl-collection-grant');
-    },
-
-    // Polling for user notifications. This is displayed in the navbar.
-    notifications: function () {
-        var Notifications = require('hyrax/notifications');
-        $('[data-update-poll-url]').each(function () {
-            var interval = $(this).data('update-poll-interval');
-            var url = $(this).data('update-poll-url');
-            new Notifications(url, interval);
-        });
     },
 
     // Search for a user to transfer a work to

@@ -42,8 +42,6 @@ Hyrax::Engine.routes.draw do
   match 'batch_edits/:id' => 'batch_edits#add', :via => :put
   match 'batch_edits' => 'batch_edits#destroy_collection', :via => :delete
 
-  # Notifications route for catalog index view
-  get 'users/notifications_number' => 'users#notifications_number', as: :user_notify
   resources :batch_uploads, only: [:new, :create], controller: 'batch_uploads'
 
   resources :collections, only: :show do # public landing show page
