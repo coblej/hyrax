@@ -8,14 +8,21 @@ module ApplicationCable
 
     private
 
-      # rubocop:disable Lint/AssignmentInCondition
       def find_verified_user
-        if verified_user = env['warden'].user
-          verified_user
+        user = ::User.find_by(id: user_id)
+        if user
+          user
         else
           reject_unauthorized_connection
         end
       end
-    # rubocop:enable Lint/AssignmentInCondition
+
+      def user_id
+        session['warden.user.user.key'][0][0]
+      end
+
+      def session
+        cookies.encrypted[Rails.application.config.session_options[:key]]
+      end
   end
 end

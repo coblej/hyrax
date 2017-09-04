@@ -1,7 +1,7 @@
 module Hyrax
   class NotificationsChannel < ApplicationCable::Channel
     def subscribed
-      stream_from current_user.user_key
+      stream_for current_user
     end
 
     def unsubscribed
