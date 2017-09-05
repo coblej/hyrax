@@ -15,10 +15,6 @@ App.cable.subscriptions.create("Hyrax::NotificationsChannel", {
         if (count == 0) {
             countSelector.addClass('invisible');
         }
-        else if (count == 1) {
-            countSelector.removeClass('invisible');
-            countSelector.addClass('label-danger').removeClass('label-default');
-        }
         else {
             countSelector.removeClass('invisible');
             countSelector.addClass('label-danger').removeClass('label-default');
