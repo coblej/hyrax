@@ -7,5 +7,9 @@ module Hyrax
     def unsubscribed
       stop_all_streams
     end
+
+    def update_locale(data)
+      current_user.update(preferred_locale: data['locale'])
+    end
   end
 end

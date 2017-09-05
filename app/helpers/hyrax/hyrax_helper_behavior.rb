@@ -59,7 +59,7 @@ module Hyrax
       mailbox = UserMailbox.new(user)
       unread_notifications = mailbox.unread_count
       link_to(hyrax.notifications_path,
-              'aria-label' => mailbox.label,
+              'aria-label' => mailbox.label(params[:locale]),
               class: 'notify-number') do
         capture do
           concat content_tag(:span, '', class: 'fa fa-bell')
