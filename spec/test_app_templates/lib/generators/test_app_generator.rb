@@ -70,12 +70,6 @@ class TestAppGenerator < Rails::Generators::Base
     gsub_file 'config/initializers/arkivo_constraint.rb', 'false', 'true'
   end
 
-  # def run_action_cable_within_test_app
-  #   inject_into_file 'config/application.rb', after: "class Application < Rails::Application\n" do
-  #     "    config.action_cable.mount_path = '/cable'\n"
-  #   end
-  # end
-
   def disable_animations_for_more_reliable_feature_specs
     inject_into_file 'config/environments/test.rb', after: "Rails.application.configure do\n" do
       "  config.middleware.use DisableAnimationsInTestEnvironment\n"
