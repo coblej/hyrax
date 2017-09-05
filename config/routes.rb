@@ -92,6 +92,10 @@ Hyrax::Engine.routes.draw do
       delete 'delete_all'
     end
   end
+  namespace :notifications do
+    # WebSocket for notifications
+    mount ActionCable.server => 'endpoint'
+  end
 
   # User profile
   resources :users, only: [:index, :show] do
