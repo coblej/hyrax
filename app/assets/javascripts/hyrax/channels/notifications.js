@@ -12,7 +12,7 @@ App.cable.subscriptions.create("Hyrax::NotificationsChannel", {
         notification.attr('aria-label', label);
         countSelector.html(count);
 
-        if (count == 0) {
+        if (count === 0) {
             countSelector.addClass('invisible');
         }
         else {
