@@ -10,6 +10,21 @@ class UserMailbox
     messages.each { |m| m.mark_as_read(user) }
   end
 
+  def unread_count
+    user.mailbox.inbox(unread: true).count
+  end
+
+  def label
+    case unread_count
+    when 0
+      I18n.t("hyrax.toolbar.notifications.zero")
+    when 1
+      I18n.t("hyrax.toolbar.notifications.one")
+    else
+      I18n.t("hyrax.toolbar.notifications.many", count: unread_count)
+    end
+  end
+
   def delete_all
     user.mailbox.inbox.each do |msg|
       delete_message(msg)
