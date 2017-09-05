@@ -74,7 +74,6 @@
 //= require hyrax/admin/graphs
 //= require hyrax/save_work
 //= require hyrax/permissions
-//= require hyrax/channels/notifications
 //= require hyrax/autocomplete
 //= require hyrax/autocomplete/default
 //= require hyrax/autocomplete/work
